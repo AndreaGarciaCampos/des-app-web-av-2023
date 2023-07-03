@@ -10,7 +10,8 @@ function App () {
       .then((response) => {
         return response.json()
       }).then((results) => {
-        setGifs(results.data)
+        console.log(results)
+        setGifs(results)
       }).catch((error) => {
         console.error(error)
       })
