@@ -11,10 +11,10 @@ function App () {
   const [busqueda, setBusqueda] = useState('')
 
   const peticionGet = async () => {
-    await axios.get('https://jsonplaceholder.typicode.com/users')
+    await axios.get('https://api.github.com/repos/facebook/react/issues')
       .then(response => {
-        setUsuarios(response.data)
-        setTablaUsuarios(response.data)
+        setUsuarios(response)
+        setTablaUsuarios(response)
       }).catch(error => {
         console.log(error)
       })
