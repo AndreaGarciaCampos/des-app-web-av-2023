@@ -11,10 +11,10 @@ function App () {
   const [busqueda, setBusqueda] = useState('')
 
   const peticionGet = async () => {
-    await axios.get('https://api.github.com/repos/facebook/react/issues')
+    await axios.get('https://api.github.com/repos/facebook/react/issuess')
       .then(response => {
-        setUsuarios(response)
-        setTablaUsuarios(response)
+        setUsuarios(response.data)
+        setTablaUsuarios(response.data)
       }).catch(error => {
         console.log(error)
       })
