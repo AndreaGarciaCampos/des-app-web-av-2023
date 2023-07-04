@@ -11,16 +11,16 @@ function App () {
   const [busqueda, setBusqueda] = useState('')
 
   const peticionGet = async () => {
-    await axios.get('https://api.github.com/repos/facebook/react/issues')
-      .then(response => {
-        setUsuarios(response.data)
-        setTablaUsuarios(response.data)
-      }).catch(error => {
-        console.log(error)
-      })
+    try {
+      const response = await axios.get('https://api.github.com/repos/facebook/react/issues')
+      setUsuarios(response.data)
+      setTablaUsuarios(response.data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setBusqueda(e.target.value)
     filtrar(e.target.value)
   }
@@ -57,26 +57,30 @@ function App () {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Titulo</th>
+              <th>Título</th>
               <th>Nombre de Usuario</th>
-
             </tr>
           </thead>
 
           <tbody>
             {usuarios &&
-           usuarios.map((usuario) => (
-             <tr key={usuario.id}>
-               <td>{usuario.id}</td>
-               <td>{usuario.title}</td>
-               <td> {usuario.user.login} </td>
-
-             </tr>
-           ))}
+              usuarios.map((usuario) => (
+                <tr key={usuario.id}>
+                  <td>{usuario.id}</td>
+                  <td>
+                    {/* Aplicamos estilos personalizados al enlace */}
+                    <a
+                      href={`/usuario/${usuario.id}`}
+                      style={{ textDecoration: 'none', color: 'black' }}
+                    >
+                      {usuario.title}
+                    </a>
+                  </td>
+                  <td>{usuario.user.login}</td>
+                </tr>
+              ))}
           </tbody>
-
         </table>
-
       </div>
     </div>
   )
