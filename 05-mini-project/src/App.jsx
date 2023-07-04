@@ -57,8 +57,8 @@ function App () {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Título</th>
               <th>Nombre de Usuario</th>
+              <th>Título</th>
             </tr>
           </thead>
 
@@ -67,8 +67,8 @@ function App () {
               usuarios.map((usuario) => (
                 <tr key={usuario.id}>
                   <td>{usuario.id}</td>
+                  <td>{usuario.user.login}</td>
                   <td>
-                    {/* Aplicamos estilos personalizados al enlace */}
                     <a
                       href={`/usuario/${usuario.id}`}
                       style={{ textDecoration: 'none', color: 'black' }}
@@ -76,7 +76,6 @@ function App () {
                       {usuario.title}
                     </a>
                   </td>
-                  <td>{usuario.user.login}</td>
                 </tr>
               ))}
           </tbody>
