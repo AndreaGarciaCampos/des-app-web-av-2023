@@ -11,7 +11,7 @@ function App () {
   const [busqueda, setBusqueda] = useState('')
 
   const peticionGet = async () => {
-    await axios.get('https://api.github.com/repos/facebook/react/issuess')
+    await axios.get('https://api.github.com/repos/facebook/react/issues')
       .then(response => {
         setUsuarios(response.data)
         setTablaUsuarios(response.data)
@@ -27,9 +27,7 @@ function App () {
 
   const filtrar = (terminoBusqueda) => {
     const resultadosBusqueda = tablaUsuarios.filter((elemento) => {
-      if (elemento.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
-    elemento.company.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
-      ) {
+      if (elemento.title.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) {
         return elemento
       }
     })
@@ -46,7 +44,7 @@ function App () {
         <input
           className='form-control inputBuscar'
           value={busqueda}
-          placeholder='Búsqueda por Nombre o Empresa'
+          placeholder='Búsqueda por Nombre'
           onChange={handleChange}
         />
         <button className='btn btn-success'>
@@ -59,13 +57,9 @@ function App () {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Nombre</th>
-              <th>Teléfono</th>
+              <th>Titulo</th>
               <th>Nombre de Usuario</th>
-              <th>Correo</th>
-              <th>Sitio Web</th>
-              <th>Ciudad</th>
-              <th>Empresa</th>
+
             </tr>
           </thead>
 
@@ -74,13 +68,9 @@ function App () {
            usuarios.map((usuario) => (
              <tr key={usuario.id}>
                <td>{usuario.id}</td>
-               <td>{usuario.name}</td>
-               <td>{usuario.phone}</td>
-               <td>{usuario.username}</td>
-               <td>{usuario.email}</td>
-               <td>{usuario.website}</td>
-               <td>{usuario.address.city}</td>
-               <td>{usuario.company.name}</td>
+               <td>{usuario.title}</td>
+               <td> {usuario.user.login} </td>
+
              </tr>
            ))}
           </tbody>
